@@ -1,0 +1,254 @@
+<!-- Generated template for the PropostaDetalheInformacoesComponent component -->
+<ion-item-group>
+  <ion-item-divider color="light">Status da Demanda</ion-item-divider>
+  <ion-item  [ngSwitch]=proposta.desStatusProposta>
+    Status atual:
+    <ion-badge item-end color="danger" *ngSwitchCase="0">"Não iniciado"</ion-badge>
+    <ion-badge item-end color="secondary" *ngSwitchCase="1">"Em Orçamentação"</ion-badge>
+    <ion-badge item-end color="primary" *ngSwitchCase="2">"Em Detalhamento"</ion-badge>
+  </ion-item>
+</ion-item-group>
+
+<ion-item-group >
+  <ion-item-divider color="light">Informações Básicas</ion-item-divider>
+
+  <ion-item item-end>
+    <ion-label>Código</ion-label>
+    <ion-input [disabled]="true" type="text" [(ngModel)]="proposta.codDemanda" name="codDemanda"></ion-input>
+  </ion-item>
+  <ion-item item-end>
+    <ion-label>Descrição</ion-label>
+    <ion-textarea [disabled]="true" type="text" [(ngModel)]="proposta.desDemanda" name="desDemanda"></ion-textarea>
+  </ion-item>
+  <ion-item>
+    <ion-label>Resumo</ion-label>
+    <ion-textarea [disabled]="true" type="text" [(ngModel)]="proposta.desResumoEscopo" name="desResumoEscopo"></ion-textarea>
+  </ion-item>
+  <ion-item>
+    <ion-label>Solicitante</ion-label>
+    <ion-input [disabled]="true" type="text" [(ngModel)]="proposta.solicitante.desNomeSolicitante" name="desNomeSolicitante"></ion-input>
+  </ion-item>
+  <ion-item>
+    <ion-label>Responsável</ion-label>
+    <ion-input [disabled]="true" type="text" [(ngModel)]="proposta.nomResponsavelAcc.nome" name="nome"></ion-input>
+  </ion-item>
+  <!-- 
+  <ion-item>
+    <ion-label>Priorização Cliente</ion-label>
+    <ion-input [disabled]="true" type="number" [(ngModel)]="proposta.numPriorizacaoCli" name="numPriorizacaoCli"></ion-input>
+  </ion-item>
+    <ion-item>
+        <ion-label>Demanda</ion-label>
+        <ion-input [disabled]="true" type="text" [(ngModel)]="proposta.desDemanda" name="desDemanda"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label>Data da solicitação</ion-label>
+        <ion-input [disabled]="true" [(ngModel)]="proposta.datSolicitacao" name="datSolicitacao"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label>Data de início</ion-label>
+        <ion-input [disabled]="true" [(ngModel)]="proposta.datInicio" name="datInicio"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label>Data de término</ion-label>
+        <ion-input [disabled]="true" [(ngModel)]="proposta.datTermino" name="datTermino"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label>Cliente Solicitante</ion-label>
+        <ion-input [disabled]="true" type="text" [(ngModel)]="proposta.solicitante.desNomeSolicitante" name="desSolicitanteCli"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label>Responsável Accenture</ion-label>
+        <ion-input [disabled]="true" type="text" [(ngModel)]="proposta.nomResponsavelAcc.nome" name="nomResponsavelAcc"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label>Priorização Cliente</ion-label>
+        <ion-input [disabled]="true" type="number" [(ngModel)]="proposta.numPriorizacaoCli" name="numPriorizacaoCli"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label>Pedido detalhado</ion-label>
+        <ion-toggle [disabled]="true" [(ngModel)]="proposta.flagPedidoDetalhado" name="flagPedidoDetalhado"></ion-toggle>
+      </ion-item>
+    
+      <ion-item>
+        <ion-label>Prazo da análise do detalhamento</ion-label>
+        <ion-input [disabled]="true" type="text" (click)="abrirTempoDetalhamento()" [(ngModel)]="proposta.prazoAnaliseDetalhamento" name="prazoAnaliseDetalhamento"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label>Observação</ion-label>
+        <ion-input [disabled]="true" type="text" [(ngModel)]="proposta.desObservacao" name="desObservacao"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label>Status Proposta</ion-label>
+        <ion-input [disabled]="true" type="text" [(ngModel)]="proposta.desStatusProposta" name="desStatusProposta"></ion-input>
+      </ion-item> -->
+</ion-item-group>
+<ion-item-group>
+  <ion-item-divider color="light">Orçamentação</ion-item-divider>
+  <ion-item>
+    <ion-label>Tipo de Orçamento</ion-label>
+    <ion-select [disabled]="true" [(ngModel)]="proposta.orcamento.isOrcamentoDetalhado" name="orcamento.isOrcamentoDetalhado">
+      <ion-option value="false">Macro</ion-option>
+      <ion-option value="true">Detalhado</ion-option>
+    </ion-select>
+  </ion-item>
+  <ion-item>
+    <ion-label>Tempo para Orçamento</ion-label>
+    <ion-input type="text" [disabled]="true" [(ngModel)]="proposta.orcamento.prazoOrcamento" name="orcamento.prazoOrcamento">
+    </ion-input>
+  </ion-item>
+
+  <div *ngIf="proposta.orcamento.isOrcamentoDetalhado==1">
+
+    <ion-item>
+      <ion-label>Possui detalhamento/EF?</ion-label>
+      <ion-select [disabled]="true" [(ngModel)]="proposta.orcamento.flagPossuiDetalhamento" name="orcamento.flagPossuiDetalhamento">
+        <ion-option value="true">Sim</ion-option>
+        <ion-option value="false">Não</ion-option>
+      </ion-select>
+    </ion-item>
+
+    <!-- Div para controlar a exibicao de campos de acordo com o detalhamento/EF -->
+    <div *ngIf="proposta.orcamento.flagPossuiDetalhamento==1">
+      <ion-item>
+        <ion-label>Nota Entry Criteria</ion-label>
+        <ion-input type="text" [disabled]="true" [(ngModel)]="proposta.orcamento.notaEntryCriteria" name="orcamento.notaEntryCriteria">
+        </ion-input>
+      </ion-item>
+    </div>
+  </div>
+
+</ion-item-group>
+
+
+
+<ion-item-group>
+  <ion-item-divider color="light">Classificação da Demanda</ion-item-divider>
+  <!-- Campos em comum -->
+  <ion-item>
+    <ion-label>Tipo da Demanda</ion-label>
+    <ion-select [disabled]="true" [(ngModel)]="proposta.isDemandaAgil" name="isDemandaAgil">
+      <ion-option value="false">Cascata</ion-option>
+      <ion-option value="true">Ágil</ion-option>
+    </ion-select>
+  </ion-item>
+  <ion-item>
+    <ion-label>Horas Estimadas</ion-label>
+    <ion-input type="text" [disabled]="true" [(ngModel)]="proposta.numHorasEstimadas" name="numHorasEstimadas">
+    </ion-input>
+  </ion-item>
+  <ion-item>
+    <ion-label>Data de início</ion-label>
+    <ion-datetime [disabled]="true" displayFormat="DD MMM YYYY" pickerFormat="DD MMM YYYY" [(ngModel)]="proposta.datInicio" name="datInicio"></ion-datetime>
+  </ion-item>
+  <ion-item>
+    <ion-label>Data de término</ion-label>
+    <ion-datetime [disabled]="true" displayFormat="DD MMM YYYY" pickerFormat="DD MMM YYYY" [(ngModel)]="proposta.datTermino"
+      name="datTermino"></ion-datetime>
+  </ion-item>
+  <!-- Modelo cascata -->
+  <div *ngIf="proposta.isDemandaAgil==0">
+    <ion-item>
+      <ion-label>Pontos de Função</ion-label>
+      <ion-input [disabled]="true" type="number" [(ngModel)]="proposta.numPF" name="numPF">
+      </ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label>Índice de Produtividade</ion-label>
+      <ion-input [disabled]="true" type="number" [(ngModel)]="proposta.numIP" name="numIP">
+      </ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label>Houve conciliação?</ion-label>
+      <ion-select [disabled]="true" [(ngModel)]="proposta.flagConciliacao" name="flagConciliacao">
+        <ion-option value="true">Sim</ion-option>
+        <ion-option value="false">Não</ion-option>
+      </ion-select>
+    </ion-item>
+    <!-- Se houve conciliação, exibir os campos: -->
+    <div *ngIf="proposta.flagConciliacao=='true'">
+      <ion-item>
+        <ion-label>Justificativa</ion-label>
+        <ion-input type="text" [disabled]="true" [(ngModel)]="proposta.desJustificativa" name="desJustificativa">
+        </ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label>Conciliação aceita?</ion-label>
+        <ion-select [disabled]="true" [(ngModel)]="proposta.flagConcilicacaoAceita" name="flagConcilicacaoAceita">
+          <ion-option value="true">Sim</ion-option>
+          <ion-option value="false">Não</ion-option>
+        </ion-select>
+      </ion-item>
+    </div>
+  </div>
+  <!-- Modelo Agil-->
+  <div *ngIf="proposta.isDemandaAgil==1">
+    <ion-item>
+      <ion-label>Quantidade de Sprints</ion-label>
+      <ion-input [disabled]="true" type="number" [(ngModel)]="proposta.numSprints" name="numSprints">
+      </ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label>Duração de Sprint</ion-label>
+      <ion-input [disabled]="true" type="number" [(ngModel)]="proposta.tempoPorSprint" name="tempoPorSprint">
+      </ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label>Horas Produtivas por Sprint</ion-label>
+      <ion-input [disabled]="true" type="number" [(ngModel)]="proposta.numHorasProdSprint" name="numHorasProdSprint">
+      </ion-input>
+    </ion-item>
+
+    <!-- Time -->
+    <ion-card>
+      <ion-card-header>
+        <ion-label>Composição do time</ion-label>
+      </ion-card-header>
+
+      <ion-card-content>
+        <ion-grid>
+
+          <div name="times" margin-bottom>
+
+            <section *ngFor="let time of proposta.time; let i = index">
+              <ion-item-group>
+                <ion-row>
+                  <ion-col>
+                    <ion-item>
+                      <ion-label stacked>Percentual?</ion-label>
+                      <ion-toggle [disabled]="true" [(ngModel)]= "time.isQtdPercentual" name="time.isQtdPercentual"></ion-toggle>
+                    </ion-item>
+                  </ion-col>
+                  <ion-col>
+                    <ion-item>
+                      <ion-label stacked>Quantidade</ion-label>
+                      <ion-input type="text" [disabled]="true" [(ngModel)]= "time.qtdProfissional" name="time.qtdProfissional">
+                      </ion-input>
+                    </ion-item>
+                  </ion-col>
+                  <ion-col>
+                    <ion-item>
+                      <ion-label stacked>Papel</ion-label>
+                      <ion-input [disabled]="true" type="text"  [(ngModel)]= "time.desPapelTime" name="time.desPapelTime">
+                      </ion-input>
+                    </ion-item>
+                  </ion-col>
+                </ion-row>
+              </ion-item-group>
+
+            </section>
+          </div>
+
+        </ion-grid>
+      </ion-card-content>
+    </ion-card>
+    <!-- Fim Time -->
+  </div>
+
+</ion-item-group>
+<ion-item-group>
+    <ion-item-divider color="light">Observações</ion-item-divider>
+<ion-item>
+    <ion-textarea [disabled]="true" type="text" [(ngModel)]="proposta.desObservacao" name="desObservacao"></ion-textarea>
+  </ion-item>
+</ion-item-group>

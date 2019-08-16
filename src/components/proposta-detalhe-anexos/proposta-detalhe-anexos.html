@@ -1,0 +1,42 @@
+<div>
+	<div class="panel panel-primary">
+		<ion-list>
+			<button ion-item *ngFor="let arquivo of proposta.arquivos" (click)="itemTapped(arquivo)">
+					<!-- CARD -->
+					<ion-card>
+						<ion-card-content>
+							<ion-item text-wrap>
+								<ion-icon name="link" item-start color="primary"></ion-icon>
+								<b>Usuário XXX</b> fez o upload do arquivo <b>{{arquivo.nome}}</b>
+							</ion-item>
+						</ion-card-content>
+
+						<ion-row>
+							<ion-col align-self-center text-center>
+								<ion-note>
+									{{arquivo.dataUpload | date:'dd/MM/yyyy HH:mm:ss'}}
+								</ion-note>
+							</ion-col>
+						</ion-row>
+					</ion-card>
+			</button>
+		</ion-list>
+	</div>
+</div>
+<div *ngIf="currentFileUpload" class="progress">
+	<div class="progress-bar progress-bar-info progress-bar-striped"
+		role="progressbar" attr.aria-valuenow="{{progress.percentage}}"
+		aria-valuemin="0" aria-valuemax="100"
+		[ngStyle]="{width:progress.percentage+'%'}">
+		{{progress.percentage}}%</div>
+</div>
+
+<ion-row style="float: right; padding: 4px;">
+	<label ion-fab icon-only style="margin-right: 6px;">
+		<input type="file" (change)="selectFile($event)" style="display: none;">
+		<ion-icon name="attach"></ion-icon>
+	</label>
+	<button class="btn" color="secondary" (click)="upload()" ion-fab right icon-only [disabled]="!selectedFiles">
+		<ion-icon name="send"></ion-icon>
+	</button>
+</ion-row>

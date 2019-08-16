@@ -1,0 +1,45 @@
+<!--
+  Generated template for the SolicitanteNovoPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+  <ion-navbar color="toolbar">
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>Novo Solicitante</ion-title>
+  </ion-navbar>
+</ion-header>
+
+
+<ion-content padding>
+  <form #form="ngForm" (ngSubmit)="cadastrarSolicitante(form)">
+    <ion-item>
+      <ion-label stacked>Nome do Solicitante</ion-label>
+      <ion-input type="text" [(ngModel)]="solicitante.desNomeSolicitante" name="desNomeSolicitante"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label stacked>Cliente</ion-label>
+      <ion-input type="text" [(ngModel)]="solicitante.desCliente" name="desCliente"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label stacked>Projeto</ion-label>
+      <ion-input type="text" [(ngModel)]="solicitante.desProjeto" name="desProjeto"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label stacked>Área</ion-label>
+      <ion-input type="text" [(ngModel)]="solicitante.desArea" name="desArea"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label stacked>Cargo</ion-label>
+      <ion-input type="text" [(ngModel)]="solicitante.desCargo" name="desCargo"></ion-input>
+    </ion-item>
+    <ion-footer no-shadow>
+      <ion-toolbar position="bottom">
+        <button ion-button type="submit" full>Cadastrar</button>
+      </ion-toolbar>
+    </ion-footer>
+  </form>
+</ion-content>

@@ -1,0 +1,82 @@
+<ion-header>
+  <ion-navbar color="toolbar">
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>Orçamento</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+  <form #form="ngForm" (ngSubmit)="cadastrarPropostaOrcamento(proposta)" novalidate>
+    <ion-row radio-group>
+      <ion-item>
+        <ion-label stacked>Tempo para Orçamento</ion-label>
+        <ion-input type="text" [(ngModel)]="proposta.orcamento.prazoOrcamento" name="orcamento.prazoOrcamento">
+        </ion-input>
+      </ion-item>
+  
+      <ion-col>
+        <ion-item>
+          <ion-label>Horas</ion-label>
+          <ion-radio value="horas"></ion-radio>
+        </ion-item>
+      </ion-col>
+      <ion-col>
+        <ion-item>
+          <ion-label>Dias</ion-label>
+          <ion-radio checked="true" value="dias"></ion-radio>
+        </ion-item>
+      </ion-col>
+    </ion-row>
+
+    <ion-item-group>
+
+      <ion-label stacked>Tipo de Solicitação</ion-label>
+
+      <ion-row radio-group [(ngModel)]="proposta.orcamento.isOrcamentoDetalhado" name="orcamento.isOrcamentoDetalhado">
+        <ion-col>
+          <ion-row>
+            <ion-item>
+              <ion-radio value="false"></ion-radio>
+              <ion-label>Macro</ion-label>
+            </ion-item>
+          </ion-row>
+        </ion-col>
+        <ion-col>
+          <ion-row>
+            <ion-item>
+              <ion-radio checked="true" value="true"></ion-radio>
+              <ion-label>Detalhada</ion-label>
+            </ion-item>
+          </ion-row>
+        </ion-col>  
+      </ion-row>
+    </ion-item-group>
+
+    <!-- Div para controlar a exibicao de campos de acordo com o tipo de orcamento -->
+    <div *ngIf="proposta.orcamento.isOrcamentoDetalhado=='true'">
+      <ion-item>
+        <ion-label stacked>Possui detalhamento/EF?</ion-label>
+        <ion-select [(ngModel)]="proposta.orcamento.flagPossuiDetalhamento" name="orcamento.flagPossuiDetalhamento">
+          <ion-option value="true">Sim</ion-option>
+          <ion-option value="false">Não</ion-option>
+        </ion-select>
+      </ion-item>
+  
+      <!-- Div para controlar a exibicao de campos de acordo com o detalhamento/EF -->
+      <div *ngIf="proposta.orcamento.flagPossuiDetalhamento=='true'">
+        <ion-item>
+          <ion-label stacked>Nota Entry Criteria</ion-label>
+          <ion-input type="text" [(ngModel)]="proposta.orcamento.notaEntryCriteria" name="orcamento.notaEntryCriteria">
+          </ion-input>
+        </ion-item>
+      </div>
+    </div>
+    <ion-footer no-shadow>
+      <ion-toolbar position="bottom">
+        <button ion-button type="submit" full>Atualizar</button>
+      </ion-toolbar>
+    </ion-footer>
+  </form>
+</ion-content>

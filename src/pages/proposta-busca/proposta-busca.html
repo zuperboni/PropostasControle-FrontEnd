@@ -1,0 +1,74 @@
+<ion-header>
+  <ion-navbar color="toolbar">
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>Filtrar por</ion-title>
+    <ion-buttons end>
+        <button ion-button icon-only>
+          Limpar filtros
+        </button>
+      </ion-buttons>
+  </ion-navbar>
+</ion-header>
+
+<ion-content>
+    <form #form="ngForm" (ngSubmit)="aplicarFiltros(form)" novalidate>
+    <ion-item-group>
+        <ion-item-divider color="light">Solicitante</ion-item-divider>
+        <ion-item>
+                  <ion-label>Nome do Solicitante</ion-label>
+                  <ion-select [(ngModel)]="solicitante" name="solicitante" >
+                      <ion-option *ngFor="let solicitante of solicitantes" [value]="solicitante" >{{solicitante.desNomeSolicitante}}</ion-option>
+                    </ion-select>
+        </ion-item>        
+      </ion-item-group>
+      <ion-item-group>
+          <ion-item-divider color="light">Responsável</ion-item-divider>
+          <ion-item>
+              <ion-label>Nome do Responsável</ion-label>
+              <ion-select  name="responsavel">
+                  <ion-option *ngFor="let usuario of usuarios" [value]="usuario">{{usuario.nome}}</ion-option>
+                </ion-select>
+          </ion-item>        
+        </ion-item-group>
+        <ion-item-group>
+            <ion-item-divider color="light">Tipo de demanda</ion-item-divider>
+            <ion-item>
+                <ion-segment color="primary"  name="isDemandaAgil">
+                  <ion-segment-button value="0">
+                      Cascata
+                    </ion-segment-button>
+                    <ion-segment-button value="1">
+                      Ágil
+                    </ion-segment-button>
+                  </ion-segment>
+            </ion-item>        
+          </ion-item-group>
+          <ion-item-group>
+            <ion-item-divider color="light">Período</ion-item-divider>
+            <ion-item>
+                <ion-label>Demandas solicitadas em</ion-label>
+             
+            </ion-item>        
+          </ion-item-group>
+          <ion-item-group>
+              <ion-item-divider color="light">Status</ion-item-divider>
+              <ion-item>
+                  <ion-label>Status da demanda</ion-label>
+                <ion-select  [(ngModel)]="proposta" name="desStatusProposta">
+                  <ion-option value="0">Não iniciado</ion-option>
+                  <ion-option value="1">Em detalhamento</ion-option>
+                  <ion-option value="2">Em orçamento</ion-option>
+                </ion-select>
+              </ion-item>        
+            </ion-item-group>
+            <ion-footer no-shadow>
+                <ion-toolbar position="bottom">
+                  <button ion-button full type="submit">APLICAR FILTROS</button>
+                </ion-toolbar>
+              </ion-footer> 
+                </form>
+</ion-content>
+
+

@@ -1,0 +1,180 @@
+<!--
+  Generated template for the PropostaNovaClassificacaoPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+  <ion-navbar color="toolbar">
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>Classificação</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+  <form [formGroup]="form" (ngSubmit)="cadastrarPropostaClassificacao(proposta,form.value)">
+    <!-- campos em comum -->
+    <ion-item>
+      <ion-label stacked>Horas Estimadas</ion-label>
+      <ion-input type="text" [(ngModel)]="proposta.numHorasEstimadas" formControlName="numHorasEstimadas">
+      </ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label stacked>Data de início</ion-label>
+      <ion-datetime displayFormat="DD MMM YYYY" pickerFormat="DD MMM YYYY" [(ngModel)]="proposta.datInicio" formControlName="datInicio"></ion-datetime>
+    </ion-item>
+    <ion-item>
+      <ion-label stacked>Data de término</ion-label>
+      <ion-datetime displayFormat="DD MMM YYYY" pickerFormat="DD MMM YYYY" [(ngModel)]="proposta.datTermino" formControlName="datTermino"></ion-datetime>
+    </ion-item>
+
+    <ion-item>
+      <ion-label stacked>Tipo da Demanda</ion-label>
+      <ion-select [(ngModel)]="proposta.isDemandaAgil" formControlName="isDemandaAgil">
+        <ion-option value="false">Cascata</ion-option>
+        <ion-option value="true">Ágil</ion-option>
+      </ion-select>
+    </ion-item>
+
+    <!-- AGIL -->
+    <div *ngIf="proposta.isDemandaAgil=='true'">
+      <ion-item>
+        <ion-label stacked>Quantidade de Sprints</ion-label>
+        <ion-input type="number" [(ngModel)]="proposta.numSprints" formControlName="numSprints">
+        </ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label stacked>Duração de Sprint</ion-label>
+        <ion-input type="number" [(ngModel)]="proposta.tempoPorSprint" formControlName="tempoPorSprint">
+        </ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label stacked>Horas Produtivas por Sprint</ion-label>
+        <ion-input type="number" [(ngModel)]="proposta.numHorasProdSprint" formControlName="numHorasProdSprint">
+        </ion-input>
+      </ion-item>
+
+      <!-- Time -->
+
+
+
+      <ion-card>
+        <ion-card-header>
+          Composição da equipe
+        </ion-card-header>
+        <ion-card-content>
+          <ion-grid>
+            <div formArrayName="times" margin-bottom>
+
+              <section [formGroupName]="i" *ngFor="let tech of form.controls.times.controls; let i = index">
+                <ion-item-group>
+                  <ion-row>
+                      <ion-col>
+                          <ion-item>
+                            <ion-label stacked>Papel</ion-label>
+                            <ion-select formControlName="desPapelTime">
+                              <ion-option *ngFor="let papel of papeis" [value]="papel.desPapel">{{papel.desPapel}}</ion-option>
+                            </ion-select>
+                          </ion-item>
+                        </ion-col>
+                    <ion-col>
+                      <ion-item>
+                        <ion-label stacked>Quantidade</ion-label>
+                        <ion-input type="text" formControlName="qtdProfissional">
+                        </ion-input>
+                      </ion-item>
+                    </ion-col>
+                    <ion-col>
+                      <!--
+                              <ion-list>
+                                  <ion-list-header>
+                                    Brightness
+                                    <ion-badge item-end>{{qtdProfissional}}</ion-badge>
+                                  </ion-list-header>
+                                  <ion-item>
+                                    <ion-range [(ngModel)]="qtdProfissional"
+                                    formControlName="qtdProfissional">
+                                      <ion-icon range-left small name="sunny"></ion-icon>
+                                      <ion-icon range-right name="sunny"></ion-icon>
+                                    </ion-range>
+                                  </ion-item>
+                                </ion-list> -->
+                      <ion-item>
+                        <ion-label>Percentual?</ion-label>
+                        <ion-toggle formControlName="isQtdPercentual"></ion-toggle>
+                      </ion-item>
+                    </ion-col>
+                    <ion-col>
+                      <span float-right ion-button icon-left clear *ngIf="form.controls.times.length > 1" (click)="removeTimeField(i)">
+                        <ion-icon name="close"></ion-icon>
+                      </span>
+                    </ion-col>
+                  </ion-row>
+
+                </ion-item-group>
+
+              </section>
+            </div>
+            <ion-row>
+              <span ion-button float-left icon-left clear (click)="addNewTimeField()">
+                <ion-icon name="add"></ion-icon>
+                Adicionar nova linha
+              </span>
+            </ion-row>
+          </ion-grid>
+        </ion-card-content>
+      </ion-card>
+      <!-- Fim Time -->
+    </div>
+
+    <!-- Cascata -->
+    <div *ngIf="proposta.isDemandaAgil=='false'">
+      <ion-item>
+        <ion-label stacked>Pontos de Função</ion-label>
+        <ion-input type="number" [(ngModel)]="proposta.numPF" formControlName="numPF">
+        </ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label stacked>Índice de Produtividade</ion-label>
+        <ion-input type="number" [(ngModel)]="proposta.numIP" formControlName="numIP">
+        </ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label stacked>Houve conciliação?</ion-label>
+        <ion-select [(ngModel)]="proposta.flagConciliacao" formControlName="flagConciliacao">
+          <ion-option value="true">Sim</ion-option>
+          <ion-option value="false">Não</ion-option>
+        </ion-select>
+      </ion-item>
+      <!-- Se houve conciliação, exibir os campos: -->
+      <div *ngIf="proposta.flagConciliacao=='true'">
+        <ion-item>
+          <ion-label stacked>Justificativa</ion-label>
+          <ion-input type="text" [(ngModel)]="proposta.desJustificativa" formControlName="desJustificativa">
+          </ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-label stacked>Conciliação aceita?</ion-label>
+          <ion-select [(ngModel)]="proposta.flagConcilicacaoAceita" formControlName="flagConcilicacaoAceita">
+            <ion-option value="true">Sim</ion-option>
+            <ion-option value="false">Não</ion-option>
+          </ion-select>
+        </ion-item>
+      </div>
+    </div>
+    <ion-item>
+      <ion-label stacked>Observação</ion-label>
+      <ion-textarea type="text" [(ngModel)]="proposta.desObservacao" formControlName="desObservacao">
+      </ion-textarea>
+    </ion-item>
+
+      <ion-toolbar position="bottom" display="block">
+        <button ion-button type="submit" full>Atualizar</button>
+      </ion-toolbar>
+  </form>
+</ion-content>

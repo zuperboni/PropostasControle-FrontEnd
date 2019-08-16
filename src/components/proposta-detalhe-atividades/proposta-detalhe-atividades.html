@@ -1,0 +1,50 @@
+<!-- Generated template for the PropostaDetalheAtividadesComponent component -->
+
+    <ion-item-group>
+        <ion-item-divider color="light">Adicionar novo comentário</ion-item-divider>
+
+            <form #form="ngForm" (ngSubmit)="inserirComentario(atividade)" novalidate>
+                <ion-item>
+                  <ion-textarea autofocus  type="text" [(ngModel)]="atividade.desDetalhamentoAtividade" name="desDetalhamentoAtividade"></ion-textarea>
+                  <button item-end  ion-fab mini  color="primary"  icon-only>
+                      <ion-icon name='send' is-active="false"></ion-icon>
+                    </button>
+                  </ion-item>            
+              </form>
+              <ion-content>
+               </ion-content>
+            </ion-item-group>
+            <ion-item-group>
+                <ion-item-divider color="light">Atividades recentes</ion-item-divider>
+        
+                <div  *ngIf="proposta.atividades != null;then exibeAtividades else naoExistemAtividades">
+                </div>    
+                
+                <ng-template #exibeAtividades>
+    
+                <!-- Lista de atividades -->
+                <ion-list> 
+                    <ion-list-header>Hoje</ion-list-header>
+                    <ion-item 
+                    *ngFor="let atividade of proposta.atividades">
+                    <ion-item>
+                      <ion-avatar item-start>
+                        <img src="../../assets/imgs/no_image.png">
+                      </ion-avatar>
+                      <h2>Teste Teste</h2>
+                      <p>{{atividade.desDetalhamentoAtividade}}</p>                     
+                    </ion-item>
+                    <ion-note item-end>{{atividade.datRegistro | date:'dd/MM/yyyy HH:mm'}}</ion-note>
+                  </ion-item>
+                  </ion-list>            
+                </ng-template>
+
+
+                <ng-template #naoExistemAtividades>
+                 <p padding align="center">Não existem atividades registradas.</p>
+                </ng-template>
+               
+
+  
+ </ion-item-group>
+

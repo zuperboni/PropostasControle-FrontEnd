@@ -1,0 +1,66 @@
+<ion-header>
+    <ion-navbar color="toolbar">
+      <button ion-button menuToggle>
+        <ion-icon name="menu" ></ion-icon>
+      </button>
+      <ion-title>Propostas</ion-title>
+    </ion-navbar> 
+   
+  </ion-header>
+
+<ion-content>
+    <!-- <ion-content padding>
+
+        <ion-searchbar (ionInput)="getItems($event)"></ion-searchbar>
+        <ion-list *ngIf="showList">
+          <ion-item *ngFor="let item of propostasBuscadas">
+            {{ item.desDemanda }}
+          </ion-item>
+        </ion-list>
+      </ion-content> -->
+  <ion-list>
+
+    
+    <button ion-item *ngFor="let item of propostas | orderBy:'item.datSolicitacao':true" (click)="itemTapped(item) ">
+        <ion-card>
+            <ion-card-content>
+              <ion-card-title>
+                Demanda {{item.codDemanda}}
+                </ion-card-title>           
+              <p>
+                  <b>Solicitante:</b> {{item.solicitante.desNomeSolicitante}}
+              </p>
+              <p>
+                <b>Responsável Accenture:</b> {{item.nomResponsavelAcc.nome}}
+            </p>
+            <p>
+                <b>Data da solicitação:</b> {{item.datSolicitacao | date:'dd/MM/yyyy'}}
+            </p>
+            <ion-row no-padding [ngSwitch]=item.desStatusProposta>
+              <ion-col text-right>
+                  <ion-badge item-end color="danger" *ngSwitchCase="0">"Não iniciado"</ion-badge>
+                  <ion-badge item-end color="secondary" *ngSwitchCase="1">"Em Orçamentação"</ion-badge>
+                  <ion-badge item-end color="primary" *ngSwitchCase="2">"Em Detalhamento"</ion-badge>
+              </ion-col>
+            </ion-row>
+            </ion-card-content>
+          </ion-card>
+     <!-- <ion-icon [name]="item.icon" item-start></ion-icon>
+      {{item.title}}
+      <div class="item-note" item-end>
+        {{item.note}}
+      </div>
+      -->
+    </button>
+   
+  </ion-list>
+
+  
+      <!-- Real floating action button, fixed. It will not scroll with the content -->
+      <ion-fab bottom right >
+        <button ion-fab mini  (click)="buscarPropostas()">
+            <ion-icon name="search"></ion-icon>
+        </button>
+      </ion-fab>
+
+</ion-content>
